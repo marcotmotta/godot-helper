@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Terrain/Terrain.gd" type="Script" id=1]
+
+
+[sub_resource type="OpenSimplexNoise" id=3]
+octaves = 4
+period = 128.0
+
+[node name="Terrain" type="Spatial"]
+script = ExtResource( 1 )
+noise = SubResource( 3 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.984239, 0.176844, 0, -0.176844, 0.984239, 0, 9.25889, 16.3143 )
