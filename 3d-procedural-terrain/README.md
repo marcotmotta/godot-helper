@@ -1,4 +1,4 @@
-#3d-procedural-terrain
+# 3d-procedural-terrain
 
 Very inspired by this 'codat' tutorial
 
