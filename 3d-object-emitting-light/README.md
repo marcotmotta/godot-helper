@@ -1,4 +1,4 @@
-# 3d Obejct Emitting Light
+# 3d Object Emitting Light
 
 By default, if you create a 3d object in Godot and put a light source inside of it, the outside of the object won't be affected by it, becoming completely black.
 
