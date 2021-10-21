@@ -1,2 +1,2 @@
 # godot-helper
-Lots of premade script and scenes to help you on making games with Godot.
+Lots of premade scripts and scenes to help you on making games with Godot.
