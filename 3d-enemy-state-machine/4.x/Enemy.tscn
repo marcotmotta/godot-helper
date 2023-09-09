@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://b7r0s4ummknjj"]
+
+[ext_resource type="Script" path="res://Enemy/Enemy.gd" id="1_jht6x"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sutea"]
+albedo_color = Color(1, 0.239216, 0.239216, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_j305a"]
+material = SubResource("StandardMaterial3D_sutea")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sdi2u"]
+albedo_color = Color(0.129412, 0.129412, 0.129412, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_w1iai"]
+material = SubResource("StandardMaterial3D_sdi2u")
+size = Vector3(0.6, 0.3, 0.3)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_klhlt"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_k1ifn"]
+height = 4.0
+radius = 15.0
+
+[node name="Enemy" type="CharacterBody3D" groups=["enemy"]]
+script = ExtResource("1_jht6x")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_j305a")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.509943)
+mesh = SubResource("BoxMesh_w1iai")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConcavePolygonShape3D_klhlt")
+
+[node name="IdleTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="SightRange" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SightRange"]
+shape = SubResource("CylinderShape3D_k1ifn")
+
+[connection signal="timeout" from="IdleTimer" to="." method="_on_idle_timer_timeout"]
+[connection signal="body_entered" from="SightRange" to="." method="_on_sight_range_body_entered"]
+[connection signal="body_exited" from="SightRange" to="." method="_on_sight_range_body_exited"]
